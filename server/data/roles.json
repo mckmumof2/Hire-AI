@@ -1,0 +1,512 @@
+[
+  {
+    "id": "intern-architect",
+    "title": "Intern Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 0, "max": 1 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["SketchUp", "Photoshop"],
+    "portfolioExpectations": ["Basic drafting", "Academic projects", "Design exercises"],
+    "projectExposure": ["residential", "academic"],
+    "evaluationCriteria": {
+      "education": 0.3,
+      "software": 0.25,
+      "portfolio": 0.25,
+      "experience": 0.1,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "junior-architect",
+    "title": "Junior Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 0, "max": 2 },
+    "mandatorySoftware": ["AutoCAD", "Revit"],
+    "preferredSoftware": ["SketchUp", "Photoshop", "3ds Max"],
+    "portfolioExpectations": ["Working drawings", "Construction details", "Site plans"],
+    "projectExposure": ["residential", "commercial", "institutional"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.25,
+      "portfolio": 0.3,
+      "experience": 0.15,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "architect",
+    "title": "Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 2, "max": 4 },
+    "mandatorySoftware": ["AutoCAD", "Revit"],
+    "preferredSoftware": ["SketchUp", "Rhino", "Photoshop", "InDesign"],
+    "portfolioExpectations": ["Detailed working drawings", "GFC drawings", "Construction coordination", "Design development"],
+    "projectExposure": ["residential", "commercial", "institutional", "government"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.2,
+      "portfolio": 0.3,
+      "experience": 0.25,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "project-architect",
+    "title": "Project Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 4, "max": 6 },
+    "mandatorySoftware": ["AutoCAD", "Revit"],
+    "preferredSoftware": ["MS Project", "Primavera", "Navisworks"],
+    "portfolioExpectations": ["Full project documentation", "GFC drawings", "DPR preparation", "Coordination drawings"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.15,
+      "portfolio": 0.25,
+      "experience": 0.35,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "senior-architect",
+    "title": "Senior Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 6, "max": 12 },
+    "mandatorySoftware": ["AutoCAD", "Revit"],
+    "preferredSoftware": ["BIM 360", "Navisworks", "MS Project"],
+    "portfolioExpectations": ["Design leadership", "Complex project documentation", "Client presentations", "Team coordination"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure", "masterplanning"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.1,
+      "portfolio": 0.2,
+      "experience": 0.4,
+      "communication": 0.2
+    }
+  },
+  {
+    "id": "principal-architect",
+    "title": "Principal Architect",
+    "category": "Architecture & Design",
+    "experienceRange": { "min": 12, "max": 30 },
+    "mandatorySoftware": [],
+    "preferredSoftware": ["Revit", "BIM 360"],
+    "portfolioExpectations": ["Firm portfolio", "Award-winning projects", "Published work", "Design philosophy"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure", "masterplanning", "urban"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.05,
+      "portfolio": 0.2,
+      "experience": 0.4,
+      "communication": 0.25
+    }
+  },
+  {
+    "id": "landscape-architect-jr",
+    "title": "Landscape Architect",
+    "category": "Landscape & Urban",
+    "experienceRange": { "min": 0, "max": 4 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["SketchUp", "Lumion", "Photoshop", "Land F/X"],
+    "portfolioExpectations": ["Site design plans", "Hardscape/softscape details", "Planting plans", "Garden design"],
+    "projectExposure": ["residential", "institutional", "parks", "commercial"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.2,
+      "portfolio": 0.3,
+      "experience": 0.2,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "senior-landscape-architect",
+    "title": "Senior Landscape Architect",
+    "category": "Landscape & Urban",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["GIS Software", "SketchUp", "Lumion", "Rhino"],
+    "portfolioExpectations": ["Master planning", "Environmental design", "Urban landscapes", "Large-scale site design"],
+    "projectExposure": ["masterplanning", "institutional", "parks", "urban", "environmental"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.15,
+      "portfolio": 0.25,
+      "experience": 0.35,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "urban-planner",
+    "title": "Urban Planner",
+    "category": "Landscape & Urban",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["AutoCAD", "GIS Software"],
+    "preferredSoftware": ["ArcGIS", "QGIS", "SketchUp", "Adobe Suite"],
+    "portfolioExpectations": ["Zoning plans", "Regional development plans", "Policy documents", "Urban analysis"],
+    "projectExposure": ["urban", "masterplanning", "government", "infrastructure", "regional"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.15,
+      "portfolio": 0.2,
+      "experience": 0.3,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "interior-designer-jr",
+    "title": "Interior Designer (Jr)",
+    "category": "Interior Design",
+    "experienceRange": { "min": 0, "max": 2 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["3ds Max", "SketchUp", "V-Ray", "Photoshop"],
+    "portfolioExpectations": ["Material boards", "Space planning", "FF&E selections", "Residential interiors"],
+    "projectExposure": ["residential", "commercial", "hospitality"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.25,
+      "portfolio": 0.35,
+      "experience": 0.1,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "interior-designer-sr",
+    "title": "Interior Designer (Sr)",
+    "category": "Interior Design",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["AutoCAD", "3ds Max"],
+    "preferredSoftware": ["Revit", "V-Ray", "SketchUp", "Photoshop"],
+    "portfolioExpectations": ["Complete interior projects", "FF&E procurement", "Fit-out documentation", "Material specifications"],
+    "projectExposure": ["commercial", "hospitality", "institutional", "residential"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.2,
+      "portfolio": 0.3,
+      "experience": 0.3,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "civil-engineer-jr",
+    "title": "Civil Engineer (Jr)",
+    "category": "Engineering",
+    "experienceRange": { "min": 0, "max": 2 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["STAAD Pro", "Excel"],
+    "portfolioExpectations": ["Site documentation", "Survey reports", "Basic structural layouts"],
+    "projectExposure": ["residential", "commercial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.3,
+      "software": 0.2,
+      "portfolio": 0.15,
+      "experience": 0.2,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "civil-engineer-mid",
+    "title": "Civil Engineer",
+    "category": "Engineering",
+    "experienceRange": { "min": 2, "max": 4 },
+    "mandatorySoftware": ["AutoCAD", "STAAD Pro"],
+    "preferredSoftware": ["ETABS", "Excel", "Revit Structure"],
+    "portfolioExpectations": ["RCC design reports", "Site coordination docs", "BOQ preparation"],
+    "projectExposure": ["commercial", "institutional", "infrastructure", "government"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.2,
+      "portfolio": 0.2,
+      "experience": 0.3,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "civil-engineer-sr",
+    "title": "Civil Engineer (Sr)",
+    "category": "Engineering",
+    "experienceRange": { "min": 4, "max": 6 },
+    "mandatorySoftware": ["AutoCAD", "STAAD Pro", "ETABS"],
+    "preferredSoftware": ["Revit Structure", "SAP2000", "MS Project"],
+    "portfolioExpectations": ["Complex structural projects", "Design review reports", "Site audit reports"],
+    "projectExposure": ["government", "institutional", "infrastructure", "high-rise"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.2,
+      "portfolio": 0.2,
+      "experience": 0.35,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "structural-designer",
+    "title": "Structural Designer",
+    "category": "Engineering",
+    "experienceRange": { "min": 2, "max": 4 },
+    "mandatorySoftware": ["STAAD Pro", "ETABS", "AutoCAD"],
+    "preferredSoftware": ["SAP2000", "SAFE", "Revit Structure"],
+    "portfolioExpectations": ["Structural analysis reports", "RCC detail drawings", "Steel structure designs"],
+    "projectExposure": ["commercial", "institutional", "industrial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.3,
+      "portfolio": 0.2,
+      "experience": 0.2,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "structural-engineer",
+    "title": "Structural Engineer",
+    "category": "Engineering",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["STAAD Pro", "ETABS"],
+    "preferredSoftware": ["SAP2000", "SAFE", "Tekla", "Revit Structure"],
+    "portfolioExpectations": ["Design review documentation", "Structural audit reports", "Complex analysis", "Peer review"],
+    "projectExposure": ["government", "institutional", "high-rise", "infrastructure", "industrial"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.2,
+      "portfolio": 0.2,
+      "experience": 0.35,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "mep-coordinator",
+    "title": "MEP Coordinator",
+    "category": "Engineering",
+    "experienceRange": { "min": 2, "max": 4 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["Revit MEP", "Navisworks", "BIM 360"],
+    "portfolioExpectations": ["Coordination drawings", "Clash detection reports", "Services layout plans"],
+    "projectExposure": ["commercial", "institutional", "hospital", "government"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.25,
+      "portfolio": 0.2,
+      "experience": 0.3,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "mep-engineer",
+    "title": "MEP Engineer",
+    "category": "Engineering",
+    "experienceRange": { "min": 4, "max": 6 },
+    "mandatorySoftware": ["AutoCAD", "Revit MEP"],
+    "preferredSoftware": ["Navisworks", "HAP", "Dialux", "BIM 360"],
+    "portfolioExpectations": ["System design documentation", "HVAC layouts", "Plumbing/electrical designs", "Load calculations"],
+    "projectExposure": ["commercial", "institutional", "hospital", "government", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.25,
+      "portfolio": 0.2,
+      "experience": 0.3,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "draftsman",
+    "title": "Draftsman",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 0, "max": 4 },
+    "mandatorySoftware": ["AutoCAD"],
+    "preferredSoftware": ["Revit", "SketchUp"],
+    "portfolioExpectations": ["Production drawings", "Clean linework", "Dimensioning accuracy", "Sheet setup"],
+    "projectExposure": ["residential", "commercial", "institutional"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.35,
+      "portfolio": 0.35,
+      "experience": 0.15,
+      "communication": 0.05
+    }
+  },
+  {
+    "id": "bim-specialist",
+    "title": "BIM Specialist",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 2, "max": 4 },
+    "mandatorySoftware": ["Revit", "Navisworks"],
+    "preferredSoftware": ["BIM 360", "Dynamo", "Solibri"],
+    "portfolioExpectations": ["BIM models", "Clash detection reports", "4D/5D BIM examples", "Family creation"],
+    "projectExposure": ["commercial", "institutional", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.35,
+      "portfolio": 0.25,
+      "experience": 0.2,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "bim-manager",
+    "title": "BIM Manager",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["Revit", "Navisworks", "BIM 360"],
+    "preferredSoftware": ["Dynamo", "Solibri", "Tekla"],
+    "portfolioExpectations": ["BIM execution plans", "Standards documentation", "Multi-discipline coordination", "Team training materials"],
+    "projectExposure": ["government", "institutional", "infrastructure", "commercial"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.25,
+      "portfolio": 0.2,
+      "experience": 0.3,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "estimator-qs",
+    "title": "Estimator / QS",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["Excel", "AutoCAD"],
+    "preferredSoftware": ["CostX", "Bluebeam", "MS Project"],
+    "portfolioExpectations": ["BOQ samples", "Cost analysis reports", "Rate analysis", "Tender documentation"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.2,
+      "portfolio": 0.2,
+      "experience": 0.35,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "specification-writer",
+    "title": "Specification Writer",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["MS Word", "Excel"],
+    "preferredSoftware": ["Bluebeam", "MasterSpec"],
+    "portfolioExpectations": ["Technical spec samples", "Material specification docs", "Product research reports"],
+    "projectExposure": ["government", "institutional", "commercial"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.1,
+      "portfolio": 0.25,
+      "experience": 0.4,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "3d-visualizer",
+    "title": "3D Visualizer",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 1, "max": 4 },
+    "mandatorySoftware": ["3ds Max", "V-Ray"],
+    "preferredSoftware": ["Lumion", "Corona", "Photoshop", "After Effects"],
+    "portfolioExpectations": ["Photorealistic renders", "Walkthrough animations", "Material quality", "Lighting setups"],
+    "projectExposure": ["residential", "commercial", "hospitality", "institutional"],
+    "evaluationCriteria": {
+      "education": 0.05,
+      "software": 0.3,
+      "portfolio": 0.45,
+      "experience": 0.15,
+      "communication": 0.05
+    }
+  },
+  {
+    "id": "computational-designer",
+    "title": "Computational Designer",
+    "category": "Technical & Support",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["Grasshopper", "Rhino"],
+    "preferredSoftware": ["Dynamo", "Python", "Processing", "Unity"],
+    "portfolioExpectations": ["Parametric designs", "Algorithmic solutions", "Digital fabrication", "Performance analysis"],
+    "projectExposure": ["commercial", "institutional", "pavilions", "facades"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.3,
+      "portfolio": 0.3,
+      "experience": 0.15,
+      "communication": 0.1
+    }
+  },
+  {
+    "id": "construction-admin",
+    "title": "Construction Admin",
+    "category": "Operations",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["AutoCAD", "Excel"],
+    "preferredSoftware": ["MS Project", "Bluebeam", "Procore"],
+    "portfolioExpectations": ["Site visit reports", "Submittal logs", "RFI documentation", "Punch lists"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.15,
+      "portfolio": 0.15,
+      "experience": 0.45,
+      "communication": 0.15
+    }
+  },
+  {
+    "id": "project-manager",
+    "title": "Project Manager (Non-Arch)",
+    "category": "Operations",
+    "experienceRange": { "min": 4, "max": 8 },
+    "mandatorySoftware": ["MS Project", "Excel"],
+    "preferredSoftware": ["Primavera", "Procore", "Asana"],
+    "portfolioExpectations": ["Project schedules", "Resource plans", "Progress reports", "Budget tracking"],
+    "projectExposure": ["government", "institutional", "commercial", "infrastructure"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.15,
+      "portfolio": 0.15,
+      "experience": 0.4,
+      "communication": 0.2
+    }
+  },
+  {
+    "id": "office-ops-manager",
+    "title": "Office/Ops Manager",
+    "category": "Operations",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["MS Office"],
+    "preferredSoftware": ["QuickBooks", "Tally", "SAP"],
+    "portfolioExpectations": ["Process documentation", "SOP samples", "Contract management experience"],
+    "projectExposure": ["general"],
+    "evaluationCriteria": {
+      "education": 0.15,
+      "software": 0.15,
+      "portfolio": 0.1,
+      "experience": 0.35,
+      "communication": 0.25
+    }
+  },
+  {
+    "id": "marketing-bd-manager",
+    "title": "Marketing / BD Manager",
+    "category": "Operations",
+    "experienceRange": { "min": 2, "max": 6 },
+    "mandatorySoftware": ["InDesign", "Photoshop"],
+    "preferredSoftware": ["Illustrator", "PowerPoint", "WordPress"],
+    "portfolioExpectations": ["RFP/RFQ responses", "Firm portfolio layouts", "Marketing collateral", "Social media campaigns"],
+    "projectExposure": ["general"],
+    "evaluationCriteria": {
+      "education": 0.1,
+      "software": 0.2,
+      "portfolio": 0.3,
+      "experience": 0.2,
+      "communication": 0.2
+    }
+  },
+  {
+    "id": "it-engineer",
+    "title": "IT Engineer",
+    "category": "Operations",
+    "experienceRange": { "min": 1, "max": 4 },
+    "mandatorySoftware": ["Windows Server", "Networking"],
+    "preferredSoftware": ["Linux", "Active Directory", "VMware"],
+    "portfolioExpectations": ["Network setup documentation", "Infrastructure plans", "License management"],
+    "projectExposure": ["general"],
+    "evaluationCriteria": {
+      "education": 0.2,
+      "software": 0.3,
+      "portfolio": 0.1,
+      "experience": 0.3,
+      "communication": 0.1
+    }
+  }
+]

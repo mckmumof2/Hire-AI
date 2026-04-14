@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+client/dist/
+
+# Environment variables (contains API keys!)
+server/.env
+.env
+.env.local
+
+# Uploads (user data, not for git)
+server/uploads/
+server/data/db.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Portable builds (too large for git)
+HRCHAKITA/
+HRCHAKITA.zip
+Hire_AI_Portable/
+Hire_AI_Portable.zip
+Hire_AI_Studio_Portable.zip
+
+# Logs
+*.log
+npm-debug.log*

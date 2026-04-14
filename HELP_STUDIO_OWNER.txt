@@ -1,0 +1,30 @@
+============================================================
+           Hire AI — Smart Recruitment Studio
+           Portable "One-Click" Version
+============================================================
+
+Thank you for using Hire AI! This version is designed to work on 
+any computer without specialized cloud hosting.
+
+HOW TO RUN:
+-----------
+1. Copy this entire folder to any computer or Pendrive.
+2. Ensure "Node.js" is installed on that computer. 
+   (Download from https://nodejs.org/ - Choose "LTS" version)
+3. Double-click the file named: "START_HIRE_AI.bat"
+4. Wait for the terminal to show "SUCCESS".
+5. Open your browser to: http://localhost:5173
+
+FOR CANDIDATES:
+---------------
+If you want a candidate to apply, they can use this link 
+on the same computer: http://localhost:5173/#apply
+
+FILES & DATA:
+-------------
+- Your candidate data is saved in: server/data/db.json
+- Your uploaded CVs are saved in: server/uploads/
+
+============================================================
+Hire AI - Designed for Architecture & Engineering Studios
+============================================================
