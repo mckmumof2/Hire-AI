@@ -39,12 +39,26 @@ const UploadModal = ({ onClose, onUploadComplete }) => {
     try {
       setProgress(50);
       const res = await api.uploadCandidate(data);
+      console.log('Upload response:', res);
       setProgress(100);
+      
+      const candidate = res.candidate || res;
       setTimeout(() => {
-        onUploadComplete(res.candidate);
-        onClose();
-      }, 500);
+        try {
+          if (candidate && candidate.id) {
+            onUploadComplete(candidate);
+          } else {
+            // Even if response is unexpected, close the modal
+            console.warn('Upload succeeded but candidate data missing, closing modal');
+            onClose();
+          }
+        } catch (callbackErr) {
+          console.error('Error in upload callback:', callbackErr);
+          onClose();
+        }
+      }, 600);
     } catch (err) {
+      console.error('Upload failed:', err);
       alert(`Upload failed: ${err.message}`);
       setIsUploading(false);
       setProgress(0);

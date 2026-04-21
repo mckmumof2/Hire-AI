@@ -59,7 +59,9 @@ const App = () => {
   }, []);
 
   const handleUploadComplete = (newCandidate) => {
-    setCandidates([newCandidate, ...candidates]);
+    if (newCandidate) {
+      setCandidates(prev => [newCandidate, ...prev]);
+    }
     // Optionally trigger analysis check or refresh later
   };
 
@@ -219,7 +221,7 @@ const App = () => {
 
       {showUpload && (
         <UploadModal 
-          onClose={() => setShowUpload(true)}
+          onClose={() => setShowUpload(false)}
           onUploadComplete={(nc) => { handleUploadComplete(nc); setShowUpload(false); }}
         />
       )}

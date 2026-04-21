@@ -1,8 +1,12 @@
 const API_BASE = '/api';
 
 async function request(url, options = {}) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 120000); // 120s timeout for file uploads
+
   const config = {
     headers: { 'Content-Type': 'application/json' },
+    signal: controller.signal,
     ...options
   };
   
@@ -13,10 +17,19 @@ async function request(url, options = {}) {
     config.body = options.body;
   }
 
-  const res = await fetch(`${API_BASE}${url}`, config);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Request failed');
-  return data;
+  try {
+    const res = await fetch(`${API_BASE}${url}`, config);
+    clearTimeout(timeoutId);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      throw new Error('Request timed out. The server may be busy — please try again.');
+    }
+    throw err;
+  }
 }
 
 export const api = {

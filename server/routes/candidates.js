@@ -206,108 +206,121 @@ router.post('/', upload.fields([
 });
 
 // Background AI processing
-async function processCandidate(candidate, appLocals) {
-  const db = appLocals.db.read();
-  const idx = db.candidates.findIndex(c => c.id === candidate.id);
-  if (idx === -1) return;
-
-  try {
-    // Update status to processing
-    db.candidates[idx].status = 'processing';
-    appLocals.db.write(db);
-
-    let cvAnalysis = null;
-    let portfolioAnalysis = null;
-
-    // Analyze CV
-    if (candidate.cvFile) {
-      const cvPath = path.join(appLocals.uploadsDir, candidate.id, 'cv', candidate.cvFile);
-      if (fs.existsSync(cvPath) && path.extname(cvPath).toLowerCase() === '.pdf') {
-        const pdfData = await extractTextFromPDF(cvPath);
-        if (pdfData.text && pdfData.text.trim().length > 50) {
-          cvAnalysis = await analyzeCVText(pdfData.text);
-          
-          // Update candidate with extracted info
-          if (cvAnalysis.name && cvAnalysis.name !== '') {
-            db.candidates[idx].name = db.candidates[idx].name === 'Unknown' ? cvAnalysis.name : db.candidates[idx].name;
-          }
-          if (cvAnalysis.email) db.candidates[idx].email = db.candidates[idx].email || cvAnalysis.email;
-          if (cvAnalysis.phone) db.candidates[idx].phone = db.candidates[idx].phone || cvAnalysis.phone;
-          db.candidates[idx].experience = cvAnalysis.totalExperienceYears || 0;
-        }
-      }
-    }
-
-    // Analyze portfolio
-    const portfolioDir = path.join(appLocals.uploadsDir, candidate.id, 'portfolio');
-    if (fs.existsSync(portfolioDir)) {
-      // Check for images first (for vision analysis)
-      const images = getImagesFromDirectory(portfolioDir);
-      if (images.length > 0) {
-        portfolioAnalysis = await analyzePortfolioImages(images);
-      }
+function processCandidate(candidate, appLocals) {
+  // Use setImmediate to ensure the HTTP response is sent before this heavy logic starts
+  setImmediate(async () => {
+    try {
+      console.log(`🤖 Starting AI analysis for: ${candidate.name} (${candidate.id})`);
       
-      // Also check for PDF portfolios
-      const portfolioPdfs = (candidate.portfolioFiles || []).filter(f => 
-        path.extname(f).toLowerCase() === '.pdf'
-      );
-      if (portfolioPdfs.length > 0 && !portfolioAnalysis) {
-        const portfolioPath = path.join(portfolioDir, portfolioPdfs[0]);
-        if (fs.existsSync(portfolioPath)) {
-          const pdfData = await extractTextFromPDF(portfolioPath);
-          if (pdfData.text && pdfData.text.trim().length > 30) {
-            portfolioAnalysis = await analyzePortfolioText(pdfData.text);
+      const db = appLocals.db.read();
+      const idx = db.candidates.findIndex(c => c.id === candidate.id);
+      if (idx === -1) return;
+
+      // Update status to processing
+      db.candidates[idx].status = 'processing';
+      appLocals.db.write(db);
+
+      // Prepare independent analysis steps
+      const cvAnalysisPromise = (async () => {
+        if (!candidate.cvFile) return null;
+        const cvPath = path.join(appLocals.uploadsDir, candidate.id, 'cv', candidate.cvFile);
+        if (!fs.existsSync(cvPath) || path.extname(cvPath).toLowerCase() !== '.pdf') return null;
+        
+        const pdfData = await extractTextFromPDF(cvPath);
+        if (!pdfData.text || pdfData.text.trim().length <= 50) return null;
+        
+        // Truncate extremely long text to speed up processing and avoid context limits
+        const truncatedText = pdfData.text.slice(0, 30000); 
+        return await analyzeCVText(truncatedText);
+      })();
+
+      const portfolioAnalysisPromise = (async () => {
+        const portfolioDir = path.join(appLocals.uploadsDir, candidate.id, 'portfolio');
+        if (!fs.existsSync(portfolioDir)) return null;
+
+        // Check for images first (Vision analysis)
+        const images = getImagesFromDirectory(portfolioDir);
+        if (images.length > 0) {
+          return await analyzePortfolioImages(images);
+        }
+        
+        // Fallback to PDF text analysis
+        const portfolioPdfs = (candidate.portfolioFiles || []).filter(f => 
+          path.extname(f).toLowerCase() === '.pdf'
+        );
+        if (portfolioPdfs.length > 0) {
+          const portfolioPath = path.join(portfolioDir, portfolioPdfs[0]);
+          if (fs.existsSync(portfolioPath)) {
+            const pdfData = await extractTextFromPDF(portfolioPath);
+            if (pdfData.text && pdfData.text.trim().length > 30) {
+              const truncatedPortText = pdfData.text.slice(0, 20000);
+              return await analyzePortfolioText(truncatedPortText);
+            }
           }
         }
+        return null;
+      })();
+
+      // Run CV and Portfolio analysis in parallel
+      const [cvAnalysis, portfolioAnalysis] = await Promise.all([
+        cvAnalysisPromise,
+        portfolioAnalysisPromise
+      ]);
+
+      // Generate combined analysis only after individual parts are ready
+      let combinedAnalysis = {};
+      if (cvAnalysis || portfolioAnalysis) {
+        combinedAnalysis = await generateCombinedAnalysis(
+          cvAnalysis || {},
+          portfolioAnalysis || {},
+          candidate.appliedRole
+        );
+      }
+
+      // Role matching
+      const roleMatches = cvAnalysis ? matchCandidateToRoles(cvAnalysis) : [];
+
+      // FINAL SYNC: Re-read DB to avoid overwriting changes that happened during the wait
+      const freshDb = appLocals.db.read();
+      const freshIdx = freshDb.candidates.findIndex(c => c.id === candidate.id);
+      
+      if (freshIdx !== -1) {
+        // Compile full analysis
+        freshDb.candidates[freshIdx].aiAnalysis = {
+          ...cvAnalysis,
+          portfolioAnalysis: portfolioAnalysis || null,
+          ...combinedAnalysis,
+          roleFitSuggestions: combinedAnalysis.roleFitSuggestions || roleMatches.map(r => ({
+            role: r.title,
+            fitScore: r.score,
+            reason: `Matched based on ${r.matchDetails?.experienceInRange ? 'experience range' : 'skills'}`
+          })),
+          roleMatches,
+          analyzedAt: new Date().toISOString()
+        };
+
+        // Update basic info from AI findings
+        if (cvAnalysis?.name) freshDb.candidates[freshIdx].name = cvAnalysis.name;
+        if (cvAnalysis?.totalExperienceYears !== undefined) {
+          freshDb.candidates[freshIdx].experience = cvAnalysis.totalExperienceYears;
+        }
+
+        freshDb.candidates[freshIdx].status = 'reviewed';
+        appLocals.db.write(freshDb);
+        
+        console.log(`✅ Analysis complete for: ${freshDb.candidates[freshIdx].name}`);
+      }
+    } catch (error) {
+      console.error(`❌ Analysis failed for ${candidate.id}:`, error.message);
+      const errDb = appLocals.db.read();
+      const errIdx = errDb.candidates.findIndex(c => c.id === candidate.id);
+      if (errIdx !== -1) {
+        errDb.candidates[errIdx].status = 'review-needed';
+        errDb.candidates[errIdx].aiAnalysis = { error: error.message, analyzedAt: new Date().toISOString() };
+        appLocals.db.write(errDb);
       }
     }
-
-    // Generate combined analysis
-    let combinedAnalysis = {};
-    if (cvAnalysis || portfolioAnalysis) {
-      combinedAnalysis = await generateCombinedAnalysis(
-        cvAnalysis || {},
-        portfolioAnalysis || {},
-        candidate.appliedRole
-      );
-    }
-
-    // Role matching
-    const roleMatches = cvAnalysis ? matchCandidateToRoles(cvAnalysis) : [];
-
-    // Compile full analysis
-    db.candidates[idx].aiAnalysis = {
-      ...cvAnalysis,
-      portfolioAnalysis: portfolioAnalysis || null,
-      ...combinedAnalysis,
-      roleFitSuggestions: combinedAnalysis.roleFitSuggestions || roleMatches.map(r => ({
-        role: r.title,
-        fitScore: r.score,
-        reason: `Matched based on ${r.matchDetails?.experienceInRange ? 'experience range' : 'skills'}`
-      })),
-      roleMatches,
-      analyzedAt: new Date().toISOString()
-    };
-
-    db.candidates[idx].status = 'reviewed';
-    appLocals.db.write(db);
-    
-    console.log(`✅ Analysis complete for: ${db.candidates[idx].name} (${candidate.id})`);
-  } catch (error) {
-    console.error(`❌ Analysis failed for ${candidate.id}:`, error.message);
-    
-    // Re-read db in case it changed
-    const freshDb = appLocals.db.read();
-    const freshIdx = freshDb.candidates.findIndex(c => c.id === candidate.id);
-    if (freshIdx !== -1) {
-      freshDb.candidates[freshIdx].status = 'review-needed';
-      freshDb.candidates[freshIdx].aiAnalysis = {
-        error: error.message,
-        analyzedAt: new Date().toISOString()
-      };
-      appLocals.db.write(freshDb);
-    }
-  }
+  });
 }
 
 // POST /api/candidates/bulk-assess — Trigger analysis for all pending candidates
