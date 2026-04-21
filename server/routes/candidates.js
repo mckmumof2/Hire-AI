@@ -192,9 +192,7 @@ router.post('/', upload.fields([
     req.app.locals.db.write(db);
 
     // Start AI analysis in background
-    processCandidate(candidate, req.app.locals).catch(err => {
-      console.error(`Analysis failed for ${candidateId}:`, err.message);
-    });
+    processCandidate(candidate, req.app.locals);
 
     res.status(201).json({ 
       message: 'Candidate uploaded successfully. AI analysis in progress.',
